@@ -59,7 +59,3 @@ public class AreaCalculator {
         scanner.close();
     }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> c09471672b25724c4ad68bf4c19dde6a83a0667c
