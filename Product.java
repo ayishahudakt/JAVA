@@ -1,73 +1,56 @@
-Cars.java 
- 
-package Module_1; 
-import java.util.Scanner; 
-public class Cars { 
-    public static void main(String[] args) { 
-        Scanner s = new Scanner(System.in); 
-        int objs, price; 
-        String name, code; 
-        int lowpr = Integer.MAX_VALUE; 
-        Product lowestPricedProduct = null; 
-        System.out.println("Enter the number of objects:"); 
-        objs = s.nextInt(); 
-        for (int i = 0; i < objs; i++) { 
-            s.nextLine(); 
-            System.out.println("Enter the car product code:"); 
-            code = s.nextLine(); 
-            System.out.println("Enter the car name:"); 
-            name = s.nextLine(); 
-            System.out.println("Enter the car price:"); 
-            price = s.nextInt(); 
-            Product p = new Product(code, name, price); 
-            p.display(); 
-            if (price < lowpr) { 
-                lowpr = price; 
-                lowestPricedProduct = p; 
-            } 
-        } 
-        if (lowestPricedProduct != null) { 
-            System.out.println("\nDisplaying product with lowest value:"); 
-            lowestPricedProduct.display(); 
-        } 
-    } 
-} 
- 
- 
-Product.java 
- 
-package Module_1; 
-public class Product { 
-    String pname, pcode; 
-    int price; 
-    public Product(String pname, String pcode, int price) { 
-        this.pname = pname; 
-        this.pcode = pcode; 
-        this.price = price; 
-    } 
-    public void setPname(String pname) { 
-        this.pname = pname; 
-    } 
-    public String getPname() { 
-        return pname; 
-    } 
-    public void setPcode(String pcode) { 
-        this.pcode = pcode; 
-    } 
-    public String getPcode() { 
-        return pcode; 
-    } 
-    public void setPrice(int price) { 
-        this.price = price; 
-    } 
-    public int getPrice() { 
-        return price; 
-    } 
-    public void display() { 
-        System.out.println("-------------------------------"); 
-        System.out.print("Product code:" + this.pcode); 
-        System.out.print("\nProduct name:" + this.pname); 
-        System.out.print("\nProduct price:" + this.price + "\n"); 
-        System.out.println("-------------------------------"); 
-    } 
-} 
+import java.util.Scanner;
+
+class Product {
+    // Data members
+    int pcode;
+    String pname;
+    double price;
+
+    // Constructor
+    Product(int pcode, String pname, double price) {
+        this.pcode = pcode;
+        this.pname = pname;
+        this.price = price;
+    }
+
+    // Method to display product details
+    void display() {
+        System.out.println("Code: " + pcode + ", Name: " + pname + ", Price: " + price);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Create array to hold 3 products
+        Product[] products = new Product[3];
+
+        // Input product details from user
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Enter details for Product " + (i + 1) + ":");
+            System.out.print("Product Code: ");
+            int code = sc.nextInt();
+            sc.nextLine(); // consume newline
+            System.out.print("Product Name: ");
+            String name = sc.nextLine();
+            System.out.print("Product Price: ");
+            double price = sc.nextDouble();
+
+            // Create product object and store it in array
+            products[i] = new Product(code, name, price);
+        }
+
+        // Find the product with the lowest price
+        Product lowest = products[0];
+
+        for (int i = 1; i < 3; i++) {
+            if (products[i].price < lowest.price) {
+                lowest = products[i];
+            }
+        }
+
+        System.out.println("\nProduct with the lowest price:");
+        lowest.display();
+
+        sc.close();
+    }
+}
